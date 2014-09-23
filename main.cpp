@@ -208,7 +208,6 @@ int main(int argc, char *argv[])
         }
     }
 
-    QString text = "hello";
     QPrinter printer;
     QPainter painterPrint(&printer);
 
@@ -226,7 +225,7 @@ int main(int argc, char *argv[])
 
         Read(connfd, buff, strlen(buff));
 
-        painterImg.drawText(setting.GetRect(), Qt::AlignLeft | Qt::AlignTop, text);
+        painterImg.drawText(setting.GetRect(), Qt::AlignLeft | Qt::AlignTop, buff);
 
         painterPrint.drawPixmap(setting.GetRect(), image);
 
@@ -240,3 +239,7 @@ int main(int argc, char *argv[])
 
     return 0;
 }
+
+
+
+
