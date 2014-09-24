@@ -211,16 +211,16 @@ int main(int argc, char *argv[])
     QPrinter printer;
     QPainter painterPrint(&printer);
 
-    QPixmap image(setting.GetAddress());
-    QPainter painterImg(&image);
-
-    painterImg.setPen(setting.GetColor());
-    painterImg.setFont(QFont(setting.GetFont(), setting.GetFontSize()));
-
-
     listenfd = Tcp_listen(setting.GetIP(), setting.GetPort(), &addrlen);
 
     for ( ; ; ) {
+
+        QPixmap image(setting.GetAddress());
+        QPainter painterImg(&image);
+
+        painterImg.setPen(setting.GetColor());
+        painterImg.setFont(QFont(setting.GetFont(), setting.GetFontSize()));
+
         connfd = Accept(listenfd, NULL, NULL);
 
         Read(connfd, buff, strlen(buff));
@@ -236,6 +236,8 @@ int main(int argc, char *argv[])
 
         Close(connfd);
     }
+
+    painterPrint.end();
 
     return 0;
 }
